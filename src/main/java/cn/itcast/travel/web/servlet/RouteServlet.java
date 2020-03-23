@@ -42,6 +42,10 @@ public class RouteServlet extends BaseServlet {
             cid = Integer.parseInt(cid_str);
         }
 
+        if (rname == null || "null".equals(rname)) {
+            rname = null;
+        }
+
         //处理数据
         PageBean<Route> routePageBean = routeService.listRouteByPage(cid, currentPage, pageSize, rname);
         //返回json

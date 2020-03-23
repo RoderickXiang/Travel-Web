@@ -22,7 +22,7 @@
                 rname = window.decodeURIComponent(rname);
             }
 
-            // todo 异步发送给服务器
+            //异步发送给服务器
             load(cid, currentPage, rname);
         });
 
@@ -117,7 +117,7 @@
                         '                    <span>' + pageBean.list[i].price + '</span>\n' +
                         '                    <span>起</span>\n' +
                         '                    </p>\n' +
-                        '                    <p><a href="route_detail.html">查看详情</a></p>\n' +
+                        '                    <p><a href="route_detail.html?rid=' + pageBean.list[i].rid + '">查看详情</a></p>\n' +
                         '                    </div>\n' +
                         '        </li>';
                     lis_route += li;
