@@ -1,6 +1,17 @@
 # Default ignored files
 /workspace.xml
 
+# IntelliJ IDEA Project files
+.idea
+*.iml
+*.ipr
+*.iws
+out
+
+# maven
+pom.xml
+travel.iml
+
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
