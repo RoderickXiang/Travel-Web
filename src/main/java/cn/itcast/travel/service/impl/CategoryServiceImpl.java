@@ -23,6 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAll() {
         Jedis jedis = JedisUtil.getJedis();
         List<Category> categoriesList = new ArrayList<>();
+        assert jedis != null;
         Set<Tuple> categories_redis = jedis.zrangeWithScores("categories", 0, -1);
         if (categories_redis != null && categories_redis.size() != 0) {
             //缓存中有数据

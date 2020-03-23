@@ -17,8 +17,13 @@ public interface RouteDao {
      *
      * @param start    开始的条数
      * @param pageSize 查询的条数
-     * @param rname 搜索的路线
+     * @param rname    搜索的路线
      * @return 路线对象
      */
     List<Route> findRouteByPage(int cid, int start, int pageSize, String rname);
+
+    /**
+     * 查询单个路线的信息
+     */
+    Route findRouteById(int rid);
 }

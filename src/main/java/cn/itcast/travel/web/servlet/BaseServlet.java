@@ -20,7 +20,7 @@ public class BaseServlet extends HttpServlet {  //有service方法
         String methodName = requestURI.substring(requestURI.lastIndexOf("/") + 1);  //方法名
 
         //反射
-        try {
+        try {//谁调用谁就是this
             Method method = this.getClass().getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class); //获取方法对象
             method.invoke(this, req, resp);     //通过反射执行方法
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -31,7 +31,7 @@ public class BaseServlet extends HttpServlet {  //有service方法
     /**
      * 封装Json对象
      *
-     * @param object
+     * @param object 需要被封装的对象
      * @return json字符串
      */
     public String writeValueAsString(Object object) throws JsonProcessingException {

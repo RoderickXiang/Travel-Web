@@ -4,6 +4,7 @@ import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
 import cn.itcast.travel.service.RouteService;
 import cn.itcast.travel.service.impl.RouteServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,14 @@ import java.io.IOException;
 public class RouteServlet extends BaseServlet {
     RouteService routeService = new RouteServiceImpl();
 
+    /**
+     * 按类别分页展示路线数据
+     */
     public void listRouteByPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //类型转换
         String currentPage_str = request.getParameter("currentPage");
         String pageSize_str = request.getParameter("pageSize");
-        String cid_str = request.getParameter("cid");   //cid的值一定要有
+        String cid_str = request.getParameter("cid");
         String rname = request.getParameter("rname");   //查找的线路名字
 
         int currentPage = 0;
@@ -30,7 +34,7 @@ public class RouteServlet extends BaseServlet {
             currentPage = 1;
         }
 
-        int pageSize = 0;
+        int pageSize;
         if (pageSize_str != null && pageSize_str.length() > 0) {
             pageSize = Integer.parseInt(pageSize_str);
         } else {
@@ -52,5 +56,25 @@ public class RouteServlet extends BaseServlet {
         String routePageBean_json = this.writeValueAsString(routePageBean);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(routePageBean_json);
+    }
+
+
+    /**
+     * 获取选中的路线详情
+     */
+    public void getRouteDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+
+        String rid_str = request.getParameter("rid");   //rid不得为null
+
+        int rid = 0;
+        if (rid_str != null && !"null".equals(rid_str)) {
+            rid = Integer.parseInt(rid_str);
+        }
+
+        Route route = routeService.getRouteDetails(rid);
+        //返回json
+        response.setContentType("application/json;charset=utf-8");
+        new ObjectMapper().writeValue(response.getOutputStream(), route);
     }
 }
