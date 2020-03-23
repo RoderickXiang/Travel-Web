@@ -21,6 +21,7 @@ public class RouteServlet extends BaseServlet {
         String currentPage_str = request.getParameter("currentPage");
         String pageSize_str = request.getParameter("pageSize");
         String cid_str = request.getParameter("cid");   //cid的值一定要有
+        String rname = request.getParameter("rname");   //查找的线路名字
 
         int currentPage = 0;
         if (currentPage_str != null && currentPage_str.length() > 0) {  //判断长度
@@ -42,7 +43,7 @@ public class RouteServlet extends BaseServlet {
         }
 
         //处理数据
-        PageBean<Route> routePageBean = routeService.listRouteByPage(cid, currentPage, pageSize);
+        PageBean<Route> routePageBean = routeService.listRouteByPage(cid, currentPage, pageSize, rname);
         //返回json
         String routePageBean_json = this.writeValueAsString(routePageBean);
         response.setContentType("application/json;charset=utf-8");

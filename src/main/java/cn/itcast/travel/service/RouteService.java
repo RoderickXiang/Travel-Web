@@ -10,7 +10,8 @@ public interface RouteService {
      * @param cid 类型
      * @param currentPage
      * @param pageSize
+     * @param rname
      * @return 分页对象
      */
-    PageBean<Route> listRouteByPage(int cid, int currentPage, int pageSize);
+    PageBean<Route> listRouteByPage(int cid, int currentPage, int pageSize, String rname);
 }

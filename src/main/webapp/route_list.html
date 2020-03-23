@@ -23,11 +23,11 @@
             }
 
             // todo 异步发送给服务器
-            load(cid, currentPage);
+            load(cid, currentPage, rname);
         });
 
-        function load(cid, currentPage) {
-            $.get("route/listRouteByPage", {cid: cid, currentPage: currentPage}, function (pageBean) {
+        function load(cid, currentPage, rname) {
+            $.get("route/listRouteByPage", {cid: cid, currentPage: currentPage, rname: rname}, function (pageBean) {
                 //展示分页数据
                 $("#totalPage").html(pageBean.totalPage);
                 $("#totalCount").html(pageBean.totalCount);

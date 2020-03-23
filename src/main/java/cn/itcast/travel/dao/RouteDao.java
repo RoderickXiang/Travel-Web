@@ -10,14 +10,15 @@ public interface RouteDao {
      *
      * @return 记录总数
      */
-    int getTotalCount(int cid);
+    int getTotalCount(int cid, String rname);
 
     /**
      * 获取数据集合
      *
      * @param start    开始的条数
      * @param pageSize 查询的条数
+     * @param rname 搜索的路线
      * @return 路线对象
      */
-    List<Route> findRouteByPage(int cid, int start, int pageSize);
+    List<Route> findRouteByPage(int cid, int start, int pageSize, String rname);
 }
