@@ -40,8 +40,9 @@
 
 
                 //动态显示页码
-                let lis_page = '<li><a href="javascript:load(' + cid + ',1)">首页</a></li>';
-                lis_page += '<li class="threeword"><a href="javascript:load(' + cid + ',' + prePage + ')">上一页</a></li>';
+                //'<li><a href="javascript:load(5,2,\'西安\')">首页</a></li>'
+                let lis_page = '<li><a href="javascript:load(' + cid + ',1,\'' + rname + '\')">首页</a></li>';
+                lis_page += '<li class="threeword"><a href="javascript:load(' + cid + ',' + prePage + ',\'' + rname + '\')">上一页</a></li>';
 
                 //设置前5后4的导航条
                 let begin;
@@ -68,9 +69,9 @@
                     let li;
                     //设置当前页面效果
                     if (i === pageBean.currentPage) {
-                        li = '<li class="curPage"><a href="javascript:load(' + cid + ',' + i + ')">' + i + '</a></li>';
+                        li = '<li class="curPage"><a href="javascript:load(' + cid + ',' + i + ',\'' + rname + '\')">' + i + '</a></li>';
                     } else {
-                        li = '<li><a href="javascript:load(' + cid + ',' + i + ')">' + i + '</a></li>';
+                        li = '<li><a href="javascript:load(' + cid + ',' + i + ',\'' + rname + '\')">' + i + '</a></li>';
                     }
                     lis_page += li;
                 }
@@ -79,8 +80,8 @@
                 if (currentPage >= pageBean.totalPage) {
                     nextPage = pageBean.totalPage;
                 }
-                lis_page += '<li class="threeword"><a href="javascript:load(' + cid + ',' + nextPage + ');">下一页</a></li>';
-                lis_page += '<li class="threeword"><a href="javascript:load(' + cid + ',' + pageBean.totalPage + ');">末页</a></li>';
+                lis_page += '<li class="threeword"><a href="javascript:load(' + cid + ',' + nextPage + ',\'' + rname + '\');">下一页</a></li>';
+                lis_page += '<li class="threeword"><a href="javascript:load(' + cid + ',' + pageBean.totalPage + ',\'' + rname + '\');">末页</a></li>';
                 $("#pageBar").html(lis_page);
 
 
