@@ -39,10 +39,10 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public Route getRouteDetails(int rid) {
-        //todo 添加Route对象的属性 图片列表 商家
+        //添加Route对象的属性 图片列表 商家
         Route route = routeDao.findRouteById(rid);
         route.setRouteImgList(routeImageDao.getRouteImageList(rid));    //设置图片
         route.setSeller(sellerDao.getSellerById(route.getSid()));   //设置商家
-        return null;
+        return route;
     }
 }
