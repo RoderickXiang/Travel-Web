@@ -106,4 +106,23 @@ public class RouteServlet extends BaseServlet {
         response.setContentType("application/json;charset=utf-8");
         objectMapper.writeValue(response.getOutputStream(), flag);
     }
+
+    /**
+     * 用户添加收藏的线路
+     */
+    public void addFavoriteRoute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        String rid_str = request.getParameter("rid");
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            //用户已登入
+            if (rid_str != null && !"null".equals(rid_str)) {
+                int rid = Integer.parseInt(rid_str);
+                routeService.addFavoriteRoute(rid, user.getUid());
+            }
+        } else {
+            //用户未登录
+            response.sendRedirect(request.getContextPath() + "login.html");
+        }
+    }
 }

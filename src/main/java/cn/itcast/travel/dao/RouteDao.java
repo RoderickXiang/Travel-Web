@@ -34,4 +34,9 @@ public interface RouteDao {
      * 查询线路被收藏的次数
      */
     int routeFavoritedCount(int rid);
+
+    /**
+     * 添加收藏路线
+     */
+    void addFavoriteRoute(int rid, int uid);
 }

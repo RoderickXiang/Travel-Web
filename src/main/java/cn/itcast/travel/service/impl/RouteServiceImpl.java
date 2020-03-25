@@ -58,4 +58,9 @@ public class RouteServiceImpl implements RouteService {
     public int routeFavoritedCount(int rid) {
         return routeDao.routeFavoritedCount(rid);
     }
+
+    @Override
+    public void addFavoriteRoute(int rid, int uid) {
+        routeDao.addFavoriteRoute(rid, uid);
+    }
 }

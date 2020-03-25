@@ -34,4 +34,6 @@ public interface RouteService {
      * 线路被收藏的次数
      */
     int routeFavoritedCount(int rid);
+
+    void addFavoriteRoute(int rid, int uid);
 }

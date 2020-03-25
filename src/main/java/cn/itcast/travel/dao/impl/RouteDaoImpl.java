@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RouteDaoImpl implements RouteDao {
@@ -76,6 +77,12 @@ public class RouteDaoImpl implements RouteDao {
     public int routeFavoritedCount(int rid) {
         String sql = "select count(*) from tab_favorite where rid = ? ";
         return jdbcTemplate.queryForObject(sql, Integer.class, rid);
+    }
+
+    @Override
+    public void addFavoriteRoute(int rid, int uid) {
+        String sql = "insert into tab_favorite values(?,?,?) ";
+        jdbcTemplate.update(sql, rid, new Date(), uid);
     }
 
 }

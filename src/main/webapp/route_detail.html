@@ -47,7 +47,8 @@
             <div class="pros_price">
                 <p class="price"><strong id="price">¥2699.00</strong><span>起</span></p>
                 <p class="collect">
-                    <a class="btn" id="favorite"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
+                    <a class="btn" id="favorite" onclick="addFavoriteRoute();"><i
+                            class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>
 
                     <!--<a class="btn already" disabled="disabled"><i class="glyphicon glyphicon-heart-empty"></i>点击收藏</a>-->
                     <span id="favoritedCount"></span>
@@ -94,6 +95,21 @@
 <!--导入布局js，共享header和footer-->
 <script type="text/javascript" src="js/include.js"></script>
 <script>
+    function addFavoriteRoute() {
+        //判断用户是否登入
+        $.get("user/findUserServlet", {}, function (user) {
+            if (user) {
+                let rid = getParameter("rid");
+                $.get("route/addFavoriteRoute", {rid: rid}, function () {
+                    //刷新
+                    location.reload();
+                });
+            } else {
+                alert("请先登入");
+                window.location.href = "login.html"
+            }
+        })
+    }
 
     //图片效果
     $(document).ready(function () {
@@ -232,13 +248,13 @@
         $.get("route/isFavoriteRoute", {rid: rid}, function (flag) {
             if (flag) {
                 //被收藏
-                $("#favorite").prop("class", "btn already");
-
+                $("#favorite").prop("class", "btn already").attr("disabled", "disabled").removeAttr("onclick");
             } else {
                 //没有收藏
             }
         });
     });
+
 
 </script>
 </body>
