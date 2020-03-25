@@ -1,5 +1,6 @@
 package cn.itcast.travel.dao;
 
+import cn.itcast.travel.domain.Favorite;
 import cn.itcast.travel.domain.Route;
 
 import java.util.List;
@@ -26,4 +27,11 @@ public interface RouteDao {
      * 查询单个路线的信息
      */
     Route findRouteById(int rid);
+
+    Favorite isFavoriteRoute(int rid, int uid);
+
+    /**
+     * 查询线路被收藏的次数
+     */
+    int routeFavoritedCount(int rid);
 }

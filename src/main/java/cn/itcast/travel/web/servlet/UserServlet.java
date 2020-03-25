@@ -104,7 +104,7 @@ public class UserServlet extends BaseServlet {
             if ("Y".equals(user.getStatus())) {
                 //登入成功
                 msg.put("msg", "登入成功");
-                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("user", user);    //设置session
             } else {
                 //用户未激活
                 msg.put("msg", "用户未激活，请使用邮箱激活");

@@ -2,6 +2,7 @@ package cn.itcast.travel.web.servlet;
 
 import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
+import cn.itcast.travel.domain.User;
 import cn.itcast.travel.service.RouteService;
 import cn.itcast.travel.service.impl.RouteServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,5 +77,33 @@ public class RouteServlet extends BaseServlet {
         //返回json
         response.setContentType("application/json;charset=utf-8");
         new ObjectMapper().writeValue(response.getOutputStream(), route);
+    }
+
+
+    /**
+     * 判断路线是否被特定用户收藏
+     */
+    public void isFavoriteRoute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        String rid_str = request.getParameter("rid");
+        User user = (User) request.getSession().getAttribute("user");
+        int uid;
+        int rid;
+        if (user == null) {
+            uid = 0;
+        } else {
+            uid = user.getUid();
+        }
+        if (rid_str != null && !"null".equals(rid_str)) {
+            rid = Integer.parseInt(rid_str);
+        } else {
+            rid = 0;
+        }
+        boolean flag = routeService.isFavoriteRoute(rid, uid);
+
+        //回写数据
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json;charset=utf-8");
+        objectMapper.writeValue(response.getOutputStream(), flag);
     }
 }

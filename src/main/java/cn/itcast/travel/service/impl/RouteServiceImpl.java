@@ -9,6 +9,7 @@ import cn.itcast.travel.dao.impl.RouteDaoImpl;
 import cn.itcast.travel.dao.impl.RouteImageDaoImpl;
 import cn.itcast.travel.dao.impl.SellerDaoImpl;
 import cn.itcast.travel.domain.Category;
+import cn.itcast.travel.domain.Favorite;
 import cn.itcast.travel.domain.PageBean;
 import cn.itcast.travel.domain.Route;
 import cn.itcast.travel.service.RouteService;
@@ -39,10 +40,22 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public Route getRouteDetails(int rid) {
-        //添加Route对象的属性 图片列表 商家
+        //添加Route对象的属性 图片列表 商家 被收藏的次数
         Route route = routeDao.findRouteById(rid);
         route.setRouteImgList(routeImageDao.getRouteImageList(rid));    //设置图片
         route.setSeller(sellerDao.getSellerById(route.getSid()));   //设置商家
+        route.setCount(routeDao.routeFavoritedCount(rid));  //设置被收藏的次数
         return route;
+    }
+
+    @Override
+    public boolean isFavoriteRoute(int rid, int uid) {
+        Favorite favoriteRoute = routeDao.isFavoriteRoute(rid, uid);
+        return favoriteRoute != null;
+    }
+
+    @Override
+    public int routeFavoritedCount(int rid) {
+        return routeDao.routeFavoritedCount(rid);
     }
 }

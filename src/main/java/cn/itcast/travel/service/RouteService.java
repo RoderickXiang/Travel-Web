@@ -19,4 +19,19 @@ public interface RouteService {
      * @return 路线对象
      */
     Route getRouteDetails(int rid);
+
+
+    /**
+     * 查询路线是否被收藏
+     *
+     * @param rid 路线的id routeId
+     * @param uid 用户的id userId
+     */
+    boolean isFavoriteRoute(int rid, int uid);
+
+
+    /**
+     * 线路被收藏的次数
+     */
+    int routeFavoritedCount(int rid);
 }
