@@ -39,4 +39,17 @@ public interface RouteDao {
      * 添加收藏路线
      */
     void addFavoriteRoute(int rid, int uid);
+
+
+    /**
+     * 修改详情线路表中的count
+     */
+    void updateRouteFavoritedCount(int rid, int count);
+
+    /**
+     * 以收藏数排序
+     *
+     * @return Route列表
+     */
+    List<Route> getSortedFavoriteRoute();
 }

@@ -85,4 +85,15 @@ public class RouteDaoImpl implements RouteDao {
         jdbcTemplate.update(sql, rid, new Date(), uid);
     }
 
+    @Override
+    public void updateRouteFavoritedCount(int rid, int count) {
+        String sql = "update tab_favorite set count = ? where rid = ? ";
+        jdbcTemplate.update(sql, count, rid);
+    }
+
+    @Override
+    public List<Route> getSortedFavoriteRoute() {
+        String sql = "SELECT * FROM tab_route WHERE COUNT > 0 ORDER BY COUNT DESC";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Route.class));
+    }
 }

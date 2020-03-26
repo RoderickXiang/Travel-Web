@@ -9,7 +9,6 @@ public interface UserService {
      * 激活用户
      *
      * @param activeCode 传入的激活码
-     * @return
      */
     boolean activeUser(String activeCode);
 

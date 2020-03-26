@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/route/*")
 public class RouteServlet extends BaseServlet {
@@ -73,7 +74,7 @@ public class RouteServlet extends BaseServlet {
             rid = Integer.parseInt(rid_str);
         }
 
-        Route route = routeService.getRouteDetails(rid);
+        Route route = routeService.getRouteDetails(rid);    //添加被收藏的次数
         //返回json
         response.setContentType("application/json;charset=utf-8");
         new ObjectMapper().writeValue(response.getOutputStream(), route);
@@ -124,5 +125,16 @@ public class RouteServlet extends BaseServlet {
             //用户未登录
             response.sendRedirect(request.getContextPath() + "login.html");
         }
+    }
+
+
+    /**
+     * 获取收藏排行榜
+     */
+    public void getFavoriteRank(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        List<Route> routeList = routeService.getFavoriteRank();
+        response.setContentType("application/json;charset=utf-8");
+        new ObjectMapper().writeValue(response.getOutputStream(), routeList);
     }
 }
