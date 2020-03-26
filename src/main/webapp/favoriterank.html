@@ -9,7 +9,7 @@
     <script>
         $(function () {
             $.get("route/getFavoriteRank", {}, function (routeList) {
-                // todo 处理返回数据
+                //处理返回数据
                 let lis = "";
                 for (let i = 0; i < routeList.length; i++) {
                     let num = i + 1;
